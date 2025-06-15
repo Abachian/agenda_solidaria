@@ -1,0 +1,18 @@
+{
+	"engine": "gstring",
+	"mailFrom": "agendasolidaria@gmail.com.ar",
+	"mails": [
+		{
+			"messageId": "OlvidePassword",
+			"subject": "[Agenda solidaria] - Cambio de Contraseña",
+			"message": "<p>Estimado(a) Sr./Srta. $lastName $firstName:<br/><br/>Se ha generado una nueva contraseña para la aplicación Agenda Solidaria. A continuación encontrará sus credenciales actualizadas:<br/><br/><b>Usuario:</b> $username<br/><b>Contraseña:</b> $password<br/><br/>Por favor, utilice estas credenciales para ingresar y, si lo desea, cambie su contraseña desde la sección de perfil.<br/><br/>Por favor, no responda este mensaje. Este correo fue generado automáticamente.</p>"
+		},
+
+		{
+			"messageId": "AltaDeUsuarioAgendaSolidaria",
+			"subject": "[Agenda solidaria] - Alta de usuario Agenda Solidaria",
+			"message": "<p>Estimado(a) Sr./Srta. $lastName $firstName:<br/><br/>Su usuario ha sido dado de alta en la aplicación Agenda Solidaria.<br/><br/>A continuación sus credenciales de acceso:<br/><br/><b>Usuario:</b> $username<br/><b>Contraseña:</b> $password<br/><br/>Al ingresar por primera vez se le solicitará cambiar su contraseña inicial.<br/><br/>Por favor, no responda este mensaje. Este correo fue generado automáticamente.</p>"
+
+		}
+	]
+}
