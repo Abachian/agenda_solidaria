@@ -38,11 +38,12 @@ public class AgendaSolidariaWebSecurityConfig {
 	    			.requestMatchers("/").permitAll()		// health check
 	        		.requestMatchers("/version").permitAll()		// version
 	    	        .requestMatchers("/swagger-ui", "/swagger-ui/**", "/v3/api-docs**/**").permitAll()
-	    	        .requestMatchers("/security/login").permitAll()
+	    	        .requestMatchers("api/security/login").permitAll()
 //	    	        .requestMatchers("/security/otp/*").permitAll()
 	    	        .requestMatchers("/security/logout").authenticated()
 	    	        .requestMatchers("/security/user-info/*", "/security/change-password", "/security/forget-password/*").permitAll()
-	    	        .requestMatchers("/**").authenticated()
+					.requestMatchers("api/users/**").permitAll()
+							.anyRequest().authenticated()
 	    		);
 	    return http.build();
     }

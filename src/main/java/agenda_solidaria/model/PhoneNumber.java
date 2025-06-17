@@ -16,6 +16,7 @@ import java.time.Instant;
 @Table(name = "phone_numbers")
 public class PhoneNumber {
     @Id @GeneratedValue
+    @Column(name = "id_phone")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

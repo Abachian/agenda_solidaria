@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void createUser(CreateUserRequestDto request) {
         boolean emailAlreadyExists = userRepository.existsByEmailAndEnabledNot(request.getEmail(), true);
         boolean passwordAlreadyExists = userRepository.existsByEmailAndEnabledNot(request.getEmail(), false);
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setRole(request.getRole());
         user.setLoginIntentos(0);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
     }
 

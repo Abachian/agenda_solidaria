@@ -15,7 +15,7 @@ public class AppUser extends User {
 	private String firstName;
 	private String lastName;
 
-	public AppUser(String name, List<GrantedAuthority> authorities) {
+    public AppUser(String name, List<GrantedAuthority> authorities) {
 		super(name.toUpperCase(), "", authorities);
 	}
 

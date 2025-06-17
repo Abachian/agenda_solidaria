@@ -31,7 +31,7 @@ public class DbAuthenticationProvider implements AuthenticationProvider {
             appUser.setEmail(user.getEmail());
             appUser.setFirstName(user.getFirstName());
             appUser.setLastName(user.getLastName());
-            Authentication auth = new UsernamePasswordAuthenticationToken(user,
+            Authentication auth = new UsernamePasswordAuthenticationToken(appUser,
                     authentication.getCredentials().toString(), appUser.getAuthorities());
             return auth;
         } else {
