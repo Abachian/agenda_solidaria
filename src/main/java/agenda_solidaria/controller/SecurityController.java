@@ -2,6 +2,7 @@ package agenda_solidaria.controller;
 
 import agenda_solidaria.dto.*;
 import agenda_solidaria.exception.ServiceException;
+import agenda_solidaria.security.PasswordGenerator;
 import agenda_solidaria.security.SecurityService;
 import agenda_solidaria.service.UserService;
 import jakarta.validation.Valid;
@@ -34,7 +35,8 @@ public class SecurityController {
 
     @PostMapping("/forget-password/{username}")
     public SimpleDto<Boolean> forgetPassword(@PathVariable("username") String username) {
-        boolean interno = this.userService.forgetPassword(username);
+        String tempPassword = PasswordGenerator.generateRandomPassword();
+        boolean interno = this.userService.forgetPassword(username, tempPassword);
         return new SimpleDto<>(interno);
     }
 //

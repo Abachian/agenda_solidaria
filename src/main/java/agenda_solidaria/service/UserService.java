@@ -21,7 +21,7 @@ public interface UserService {
 
     void changePassword(ChangePasswordRequest request);
 
-    boolean forgetPassword(String username);
+    boolean forgetPassword(String username, String tempPassword);
 
 //    boolean verifyForgetPassword(String uuid);
 //

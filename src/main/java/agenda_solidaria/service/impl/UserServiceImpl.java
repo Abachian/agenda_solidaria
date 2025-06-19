@@ -174,17 +174,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public boolean forgetPassword(String username) {
+    public boolean forgetPassword(String username, String tempPassword) {
         Optional<User> oUser = this.userRepository.findByUsernameIgnoreCase(username);
-        if (oUser.isEmpty())
-            throw ServiceException.notFoundError("");
+        if (oUser.isEmpty()) {
+            throw ServiceException.notFoundError("Usuario no encontrado");
+        }
 
         User user = oUser.get();
 
+
+        user.setPassword(passwordEncoder.encode(tempPassword));
         this.userRepository.save(user);
 
-        //TODO implementar el envio de mail con olvide contraseña
-        this.mailService.enviarOlvidePassword(user);
+        // Enviar el correo con la contraseña temporal
+        this.mailService.enviarOlvidePassword(user, tempPassword);
 
         return true;
     }

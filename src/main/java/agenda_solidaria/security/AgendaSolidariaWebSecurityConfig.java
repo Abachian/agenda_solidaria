@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,6 +45,15 @@ public class AgendaSolidariaWebSecurityConfig {
 	    	        .requestMatchers("/security/user-info/*", "/security/change-password", "/security/forget-password/*").permitAll()
 					.requestMatchers("api/users/**").permitAll()
 							.anyRequest().authenticated()
+	    	        .requestMatchers("/security/login").permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/users").permitAll()
+//	    	        .requestMatchers("/security/otp/*").permitAll()
+	    	        .requestMatchers("/security/logout").authenticated()
+	    	        .requestMatchers("/security/user-info/*", "/security/change-password", "/security/forget-password/*").permitAll()
+					.requestMatchers("/api/test/**").permitAll()
+					.requestMatchers("/api/test/send-email").permitAll()
+					.requestMatchers("/api/test/test-forgot-password").permitAll()
+					.requestMatchers("/**").authenticated()
 	    		);
 	    return http.build();
     }
