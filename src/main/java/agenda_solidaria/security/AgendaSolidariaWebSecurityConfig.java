@@ -36,24 +36,19 @@ public class AgendaSolidariaWebSecurityConfig {
 	    	.csrf((config) -> config.disable())
 	    	.addFilterAfter(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 	    	.authorizeHttpRequests((authorize) -> authorize
-	    			.requestMatchers("/").permitAll()		// health check
-	        		.requestMatchers("/version").permitAll()		// version
-	    	        .requestMatchers("/swagger-ui", "/swagger-ui/**", "/v3/api-docs**/**").permitAll()
-	    	        .requestMatchers("api/security/login").permitAll()
-//	    	        .requestMatchers("/security/otp/*").permitAll()
-	    	        .requestMatchers("/security/logout").authenticated()
-	    	        .requestMatchers("/security/user-info/*", "/security/change-password", "/security/forget-password/*").permitAll()
-					.requestMatchers("api/users/**").permitAll()
+							.requestMatchers("/").permitAll()        // Health check
+							.requestMatchers("/version").permitAll()
+							.requestMatchers("/swagger-ui", "/swagger-ui/**", "/v3/api-docs**/**").permitAll()
+							.requestMatchers("/security/login").permitAll()
+							.requestMatchers(HttpMethod.GET, "/api/users").permitAll()
+							//.requestMatchers("/security/otp/*").permitAll()
+							.requestMatchers("/security/logout").authenticated()
+							.requestMatchers("/security/user-info/*", "/security/change-password", "/security/forget-password/*").permitAll()
+							.requestMatchers("/api/users/**").permitAll()  
+							.requestMatchers("/api/test/**").permitAll()
+							.requestMatchers("/api/test/send-email").permitAll()
+							.requestMatchers("/api/test/test-forgot-password").permitAll()
 							.anyRequest().authenticated()
-	    	        .requestMatchers("/security/login").permitAll()
-					.requestMatchers(HttpMethod.GET, "/api/users").permitAll()
-//	    	        .requestMatchers("/security/otp/*").permitAll()
-	    	        .requestMatchers("/security/logout").authenticated()
-	    	        .requestMatchers("/security/user-info/*", "/security/change-password", "/security/forget-password/*").permitAll()
-					.requestMatchers("/api/test/**").permitAll()
-					.requestMatchers("/api/test/send-email").permitAll()
-					.requestMatchers("/api/test/test-forgot-password").permitAll()
-					.requestMatchers("/**").authenticated()
 	    		);
 	    return http.build();
     }
