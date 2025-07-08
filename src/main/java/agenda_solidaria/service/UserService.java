@@ -17,7 +17,7 @@ public interface UserService {
     void deleteUser(Long id);
     User findByUsername(String username);
 
-    LoginResponse login(String username, String password);
+    LoginResponse login(String email, String password);
 
     void changePassword(ChangePasswordRequest request);
 

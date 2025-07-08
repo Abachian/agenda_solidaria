@@ -1,9 +1,20 @@
 package agenda_solidaria.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -45,6 +56,21 @@ public class Event {
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
+    @Column(name = "min_age")
+    private Integer minAge;
+    
+    @Column(name= "min_hours")
+    private Integer minHours;
+
+    @Column(name = "capacity")
+    private Integer capacity;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "additional_info")
+    private String additionalInfo;
+
     @ManyToOne
     @JoinColumn(name = "id_event_type", nullable = false)
     private EventType eventType;
@@ -54,6 +80,9 @@ public class Event {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private Set<Need> needs;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Resource> resources;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Image> images;

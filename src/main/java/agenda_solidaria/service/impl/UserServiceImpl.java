@@ -115,10 +115,10 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public LoginResponse login(String username, String password) {
-        Optional<User> oUser = this.userRepository.findByUsernameIgnoreCase(username);
+    public LoginResponse login(String email, String password) {
+        Optional<User> oUser = this.userRepository.findByEmail(email);
         if (oUser.isEmpty()) {
-            logger.error("El usuario {} no existe en la tabla usuarios", username);
+            logger.error("El usuario con email {} no existe en la tabla usuarios", email);
             throw ServiceException.unauthorizedError("Usuario no autorizado");
         }
         User user =  oUser.get();
@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (user.getLoginIntentos() >= 3) {
-            logger.info("El usuario {} ha realizado 3 intentos incorrectos de login", user.getUsername());
+            logger.info("El usuario {} ha realizado 3 intentos incorrectos de login", user.getEmail());
             throw ServiceException.badRequestError("Se han realizado 3 intentos incorrectos de login");
         }
         try {

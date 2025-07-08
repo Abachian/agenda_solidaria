@@ -24,7 +24,7 @@ public class SecurityController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Validated LoginRequest request) {
-        return ResponseEntity.ok(userService.login(request.getUsername().toUpperCase(), request.getPassword()));
+        return ResponseEntity.ok(userService.login(request.getEmail(), request.getPassword()));
     }
 
     @PostMapping("/change-password")

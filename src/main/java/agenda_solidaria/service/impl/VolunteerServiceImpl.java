@@ -1,8 +1,12 @@
 package agenda_solidaria.service.impl;
 
+import agenda_solidaria.dto.CreateVolunteerRequestDto;
+import agenda_solidaria.dto.CreateVolunteerResponseDto;
+import agenda_solidaria.mapper.VolunteerMapper;
 import agenda_solidaria.model.Volunteer;
 import agenda_solidaria.repository.VolunteerRepository;
 import agenda_solidaria.service.VolunteerService;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Autowired
     private VolunteerRepository volunteerRepository;
 
+    private final VolunteerMapper volunteerMapper = Mappers.getMapper(VolunteerMapper.class) ;
     @Override
     public List<Volunteer> getAllVolunteers() {
         return volunteerRepository.findAll();
@@ -26,8 +31,10 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public Volunteer createVolunteer(Volunteer volunteer) {
-        return volunteerRepository.save(volunteer);
+    public CreateVolunteerResponseDto createVolunteer(CreateVolunteerRequestDto volunteer) {
+        Volunteer newVolunteer = volunteerMapper.toEntity(volunteer);
+
+        return volunteerRepository.save(newVolunteer);
     }
 
     @Override

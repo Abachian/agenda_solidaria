@@ -1,5 +1,7 @@
 package agenda_solidaria.controller;
 
+import agenda_solidaria.dto.CreateVolunteerRequestDto;
+import agenda_solidaria.dto.CreateVolunteerResponseDto;
 import agenda_solidaria.model.Volunteer;
 import agenda_solidaria.service.VolunteerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,8 +32,8 @@ public class VolunteerController {
     }
 
     @PostMapping
-    public ResponseEntity<Volunteer> createVolunteer(@RequestBody Volunteer volunteer) {
-        return ResponseEntity.ok(volunteerService.createVolunteer(volunteer));
+    public CreateVolunteerResponseDto createVolunteerAccount(@RequestBody CreateVolunteerRequestDto volunteer) {
+        return volunteerService.createVolunteer(volunteer);
     }
 
     @PutMapping("/{id}")
